@@ -73,7 +73,7 @@ socket.on(`place`, id => {
     canPlace = false
     square.onanimationend = function() {
         var winningConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
-        if (winningConditions.some(winningCondition => Array.from(squares.children).filter(elem => elem.textContent == turn.letter).map(elem => Array.from(squares.children).indexOf(elem)).toString().includes(winningCondition.toString()))) {
+        if (winningConditions.some(winningCondition => winningCondition.filter(winningConditionIndex => Array.from(squares.children).filter(elem => elem.textContent == turn.letter).map(elem => Array.from(squares.children).indexOf(elem)).includes(winningConditionIndex)).length >= winningCondition.length)) {
             if (role == turn.letter) {
                 alert(`You won!`)
                 wins.textContent = `WINS: ${parseFloat(wins.textContent.slice(wins.textContent.indexOf(`:`) + 2)) + 1}`

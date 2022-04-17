@@ -60,7 +60,6 @@ function showTurnText() {
     turnText.textContent = `${turn.letter}'s Turn`
     turnText.style.color = turn.color
     turnText.hidden = false
-    canPlace = false
     setTimeout(() => {turnText.hidden = true, canPlace = true}, 2000)
 }
 function place(square) {
@@ -71,6 +70,7 @@ socket.on(`place`, id => {
     square.textContent = turn.letter
     square.style.color = turn.color
     square.style.animation = `place .3s forwards`
+    canPlace = false
     square.onanimationend = function() {
         var winningConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
         if (winningConditions.some(winningCondition => Array.from(squares.children).filter(elem => elem.textContent == turn.letter).map(elem => Array.from(squares.children).indexOf(elem)).toString().includes(winningCondition.toString()))) {

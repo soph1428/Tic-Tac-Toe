@@ -5,7 +5,7 @@ const server = http.createServer(app)
 const {Server} = require(`socket.io`)
 const io = new Server(server)
 app.get(`/`, (req, res) => {
-    res.send(`/tic-tac-toe.html`)
+    res.sendFile(__dirname + "/tic-tac-toe.html")
 })
 app.use(express.static(__dirname))
 io.on(`connection`, (socket) => {

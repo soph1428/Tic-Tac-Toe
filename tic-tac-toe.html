@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tic-Tac-Toe</title>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TQLNT9PB9S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TQLNT9PB9S');
+</script>
+</script>
+    <link rel="icon" href="Solid_red.png" type="image/x-icon">
+    </head>
+    <body>
+        <style>
+            body {
+                width: 100%;
+                background: linear-gradient(
+                 0deg,
+                    red 25%,
+                    lightpink 50%
+                );
+                touch-action: manipulation;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+            }
+            @keyframes place {to {font-size: 110px}}
+            </style>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+        <h1 style="font-size: 40px; text-align: center;">Tic-Tac-Toe Game</h1>
+        <p style="text-align: center;">
+        <a href="https://games-puzzles-quizzes.herokuapp.com" style="font-size: 23px; color: red;">Back to Main Page</a>
+        </p>
+        <p>
+        <div style="border: 10px solid; background-color: #CBC3E3; margin: auto; width: 420px; height: 420px;" id="board">
+            <label id="turnText" style="font-size: 115px; position: absolute; z-index: 1;" hidden></label>
+            <div id="squares" style="width: 420px; height: 420px;"></div>
+        </div>
+        <button id="start" style="font-size: 60px; position: absolute; background-color: #CBC3E3; color: #5d4063; border: solid black 5px;" hidden>Start</button>
+        <p style="text-align: center;">
+            <input id="gameInput" placeholder="Join a game with code" style="font-size: 40px; background-color: #CBC3E3; border: solid; margin-bottom: 15px;">
+            <label id="gameCode" style="font-size: 40px; background-color: #CBC3E3; border: solid;"></label><br>
+            <label id="wins" style="font-size: 50px; color: #5d4063; background-color: #CBC3E3; border: solid black;">WINS: 0</label>
+            <button id="wins" onclick="document.location.reload()" style="font-size: 40px; color: #5d4063; background-color: #CBC3E3;">New Game</button>
+        </p>
+        <p id="role" style="text-align: center; font-size: 50px;">
+            YOU ARE X.
+        </p>
+    </p>
+</p>
+    <script src="/node_modules/socket.io/client-dist/socket.io.js"></script>
+    <script src="tic-tac-toe.js"></script>
+    </body>
+</html>

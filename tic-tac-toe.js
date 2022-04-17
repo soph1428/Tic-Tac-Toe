@@ -7,7 +7,7 @@ turnText = document.getElementById(`turnText`),
 wins = document.getElementById(`wins`),
 squares = document.getElementById(`squares`),
 socket = io.connect(`https://games-tic-tac-toe.herokuapp.com`),
-player1 = ``, player2 = ``, scale = 3, canPlace = true,
+player1 = ``, player2 = ``, scale = 3, canPlace = false,
 turn = {letter: `X`, color: `grey`}, role = `X`
 gameCode.textContent = GameCode
 if (localStorage.getItem(`tic-tac-toewins`)) wins.textContent = localStorage.getItem(`tic-tac-toewins`)

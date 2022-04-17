@@ -6,7 +6,7 @@ gameCode = document.getElementById(`gameCode`),
 turnText = document.getElementById(`turnText`),
 wins = document.getElementById(`wins`),
 squares = document.getElementById(`squares`),
-socket = io.connect(`https://games-tic-tac-toe.herokuapp.com`),
+socket = io.connect(`http://127.0.0.1:5500`),
 player1 = ``, player2 = ``, scale = 3, canPlace = false,
 turn = {letter: `X`, color: `grey`}, role = `X`
 gameCode.textContent = GameCode
@@ -88,5 +88,5 @@ socket.on(`place`, id => {
         showTurnText()
     }
 })
-socket.on(`full game`, () => {alert(`Game is full.`), document.location.reload()})
+socket.on(`full game`, () => {alert(`Game is full.`)})
 socket.on(`disconnected`, () => {document.location.reload()})

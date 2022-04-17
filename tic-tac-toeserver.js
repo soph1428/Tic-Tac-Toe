@@ -30,6 +30,6 @@ io.on(`connection`, (socket) => {
         socket.on(`disconnect`, () => {io.to(gameCode).emit(`disconnected`), socket.leave(gameCode)})
     })
 })
-server.listen(process.env.PORT || 5500, `0.0.0.0`, () => {
+server.listen(process.env.PORT || 5500, `127.0.0.1`, () => {
     console.log(`listening on 5501`)
 })

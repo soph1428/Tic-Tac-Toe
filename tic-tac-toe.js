@@ -7,7 +7,7 @@ turnText = document.getElementById(`turnText`),
 wins = document.getElementById(`wins`),
 squares = document.getElementById(`squares`),
 socket = io.connect(`https://games-tic-tac-toe.herokuapp.com`),
-player1 = ``, player2 = ``, scale = 3, canPlace = false,
+player1 = ``, player2 = ``, scale = 3,
 turn = {letter: `X`, color: `grey`}, role = `X`
 if (localStorage.getItem(`tic-tac-toewins`)) wins.textContent = localStorage.getItem(`tic-tac-toewins`)
 //Server: http://127.0.0.1:5500
@@ -61,17 +61,15 @@ function showTurnText() {
     turnText.textContent = `${turn.letter}'s Turn`
     turnText.style.color = turn.color
     turnText.hidden = false
-    setTimeout(() => {turnText.hidden = true, canPlace = true}, 2000)
 }
 function place(square) {
-    if (canPlace && (role == `X` && turn.letter == `X` || role == `O` && turn.letter == `O`) && square.textContent == ``) socket.emit(`place`, square.id)
+    if (start.hidden == true && (role == `X` && turn.letter == `X` || role == `O` && turn.letter == `O`) && square.textContent == ``) socket.emit(`place`, square.id)
 }
 socket.on(`place`, id => {
     var square = document.getElementById(id)
     square.textContent = turn.letter
     square.style.color = turn.color
     square.style.animation = `place .3s forwards`
-    canPlace = false
     square.onanimationend = function() {
         var winningConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
         if (winningConditions.some(winningCondition => winningCondition.filter(winningConditionIndex => Array.from(squares.children).filter(elem => elem.textContent == turn.letter).map(elem => Array.from(squares.children).indexOf(elem)).includes(winningConditionIndex)).length >= winningCondition.length)) {

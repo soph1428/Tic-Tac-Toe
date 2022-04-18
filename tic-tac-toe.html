@@ -23,9 +23,6 @@
                     lightpink 50%
                 ) fixed;
                 touch-action: manipulation;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                user-select: none;
             }
             @keyframes place {to {font-size: 110px}}
             </style>
@@ -41,10 +38,10 @@
         </div>
         <button id="start" style="font-size: 60px; position: absolute; background-color: #CBC3E3; color: #5d4063; border: solid black 5px;" hidden>Start</button>
         <p style="text-align: center;">
-            <input id="gameInput" placeholder="Join a game with code" style="font-size: 40px; background-color: #CBC3E3; border: solid; margin-bottom: 15px;">
+            <input id="gameInput" placeholder="Join a game with code" style="font-size: 40px; background-color: #CBC3E3; border: solid; margin-bottom: 5px;"><br>
             <label id="gameCode" style="font-size: 40px; background-color: #CBC3E3; border: solid;"></label><br>
             <label id="wins" style="font-size: 50px; color: #5d4063; background-color: #CBC3E3; border: solid black;">WINS: 0</label>
-            <button id="wins" onclick="document.location.reload()" style="font-size: 40px; color: #5d4063; background-color: #CBC3E3;">New Game</button>
+            <button id="wins" onclick="document.location.reload()" style="font-size: 40px; color: #5d4063; background-color: #CBC3E3; margin-top: 12px;">New Game</button>
         </p>
         <p id="role" style="text-align: center; font-size: 50px;">
             YOU ARE X.

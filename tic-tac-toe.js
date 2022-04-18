@@ -6,10 +6,9 @@ gameCode = document.getElementById(`gameCode`),
 turnText = document.getElementById(`turnText`),
 wins = document.getElementById(`wins`),
 squares = document.getElementById(`squares`),
-socket = io.connect(`http://127.0.0.1:5500`),
+socket = io.connect(`https://games-tic-tac-toe.herokuapp.com`),
 player1 = ``, player2 = ``, scale = 3, canPlace = false,
 turn = {letter: `X`, color: `grey`}, role = `X`
-gameCode.textContent = GameCode
 if (localStorage.getItem(`tic-tac-toewins`)) wins.textContent = localStorage.getItem(`tic-tac-toewins`)
 //Server: http://127.0.0.1:5500
 //Heroku: https://games-tic-tac-toe.herokuapp.com
@@ -21,6 +20,7 @@ function layoutForSizes() {
 } layoutForSizes()
 window.onresize = layoutForSizes, window.onscroll = layoutForSizes
 socket.emit(`new game`, GameCode)
+gameCode.textContent = `Your Code: ${GameCode}`
 gameInput.onkeyup = function(e) {joinGame(e)}
 function joinGame(e) {
     if (e.key == `Enter`) {
@@ -28,11 +28,12 @@ function joinGame(e) {
     }
 }
 socket.on(`joined game`, data => {
-    gameCode.textContent = data.code
+    gameCode.textContent = `Your Code: ${data.code}`
     player1 = data.player1
     player2 = data.player2
     if (socket.id == player2) role = `O`, document.getElementById(`role`).textContent = `YOU ARE ${role}.`
     start.hidden = false
+    Array.from(squares.children).forEach(elem => elem.remove())
     for (var i = 0; i < scale; i++) {
         for (var j = 0; j < scale; j++) {
             var square = document.createElement(`div`)

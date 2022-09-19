@@ -6,12 +6,12 @@ gameCode = document.getElementById(`gameCode`),
 turnText = document.getElementById(`turnText`),
 wins = document.getElementById(`wins`),
 squares = document.getElementById(`squares`),
-socket = io.connect(`https://games-tic-tac-toe.herokuapp.com`),
+socket = io.connect(`https://games-tic-tac-toe.onrender.com`),
 player1 = ``, player2 = ``, scale = 3,
 turn = {letter: `X`, color: `grey`}, role = `X`
 if (localStorage.getItem(`tic-tac-toewins`)) wins.textContent = localStorage.getItem(`tic-tac-toewins`)
 //Server: http://127.0.0.1:5500
-//Heroku: https://games-tic-tac-toe.herokuapp.com
+//Render: https://games-tic-tac-toe.onrender.com
 function layoutForSizes() {
     start.style.left = `${board.getBoundingClientRect().left + parseFloat(board.style.width) + 25 + scrollX}px`
     start.style.top = `${board.getBoundingClientRect().top + parseFloat(board.style.height) - 62 + scrollY}px`

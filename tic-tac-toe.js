@@ -27,12 +27,10 @@ function joinGame(e) {
         socket.emit(`join game`, gameInput.value)
     }
 }
-socket.on(`joined game`, data => {
-    gameCode.textContent = `Your Code: ${data.code}`
-    player1 = data.player1
-    player2 = data.player2
-    if (socket.id == player2) role = `O`, document.getElementById(`role`).textContent = `YOU ARE ${role}.`
+
+function resetBoard() {
     start.hidden = false
+    turnText.hidden = true
     Array.from(squares.children).forEach(elem => elem.remove())
     for (var i = 0; i < scale; i++) {
         for (var j = 0; j < scale; j++) {
@@ -50,17 +48,25 @@ socket.on(`joined game`, data => {
             squares.appendChild(square)
         }
     }
+}
+
+socket.on(`joined game`, data => {
+    gameCode.textContent = `Your Code: ${data.code}`
+    player1 = data.player1
+    player2 = data.player2
+    if (socket.id == player2) role = `O`, document.getElementById(`role`).textContent = `YOU ARE ${role}.`
+    resetBoard()
     start.onclick = function () {socket.emit(`start game`)}
 })
 socket.on(`start game`, startGame)
 function startGame() {
     start.hidden = true
-    showTurnText()
+    turnText.hidden = false
+    updateTurnText()
 }
-function showTurnText() {
+function updateTurnText() {
     turnText.textContent = `${turn.letter}'s Turn`
     turnText.style.color = turn.color
-    turnText.hidden = false
 }
 function place(square) {
     if (start.hidden == true && (role == `X` && turn.letter == `X` || role == `O` && turn.letter == `O`) && square.textContent == ``) socket.emit(`place`, square.id)
@@ -78,13 +84,13 @@ socket.on(`place`, id => {
                 wins.textContent = `WINS: ${parseFloat(wins.textContent.slice(wins.textContent.indexOf(`:`) + 2)) + 1}`
                 localStorage.setItem(`tic-tac-toewins`, wins.textContent)
             } else alert(`You lost.`)
-            return document.location.reload()
+            resetBoard()
             } else if (Array.from(squares.children).filter(sqr => sqr.textContent == ``).length == 0) {
                 alert(`Tie!`)
-                return document.location.reload()
+                resetBoard()
             }
         turn = {letter: [`X`, `O`].find(letter => letter != turn.letter), color: [`grey`, `white`].find(color => color != turn.color)}
-        showTurnText()
+        updateTurnText()
     }
 })
 socket.on(`full game`, () => {alert(`Game is full.`)})
